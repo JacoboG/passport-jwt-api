@@ -102,3 +102,5 @@ const ResponseTypes = {
     JWTError: function({ msg = 'JWT Error' })
 };
 ```
+
+Great !! Already to code !!
