@@ -57,7 +57,7 @@ const AuthenticateMiddleware = {
 ```
 
 ## Validators
-The validators was implented with `express-validator`
+The validators was implemented with `express-validator`
 ```node
 const AuthValidator = {
     registerValidator: async(req, res, next);
@@ -66,7 +66,7 @@ const AuthValidator = {
 ```
 
 ## Models
-The database connection was implented with `sequelize`
+The database connection was implemented with `sequelize`
 - Role
 - Status
 - Token
