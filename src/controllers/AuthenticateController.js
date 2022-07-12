@@ -103,11 +103,11 @@ let controller = {
         };
         const access_token = jwt.sign(JSON.stringify(payload_access_token), process.env.JWT_KEY, { algorithm: process.env.JWT_ALGORITHM });
         const refresh_token = jwt.sign(JSON.stringify(payload_refresh_token), process.env.JWT_KEY, { algorithm: process.env.JWT_ALGORITHM });
-        const newToken = { access_token, refresh_token, id_user };
+        const updateToken = { access_token, refresh_token };
         try {
-            const tokenInserted = await api.insertToken({ newToken });
-            const token = await api.deleteTokenByRefreshToken({ refresh_token: old_refresh_token });
-            return next(new ResponseTypes.Success({ data: { tokens: tokenInserted } }));
+            const tokenUpdated = await api.updateTokenByRefreshToken({ refresh_token: old_refresh_token, updateToken });
+            delete updateToken.id_token;
+            return next(new ResponseTypes.Success({ data: { tokens: updateToken } }));
         } catch (error) {
             return next(new ResponseTypes.SequelizeError({ msg: 'AuthenticateController.refreshToken: ' + error.message }));
         }
