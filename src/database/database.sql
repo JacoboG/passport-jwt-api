@@ -52,12 +52,14 @@ CREATE INDEX idx_users_email ON users(email);
 
 -- TOKEN TABLE -- TOKEN TABLE -- TOKEN TABLE -- TOKEN TABLE -- TOKEN TABLE -- TOKEN TABLE -- TOKEN TABLE -- TOKEN TABLE
 CREATE TABLE IF NOT EXISTS tokens (
+    id_token INT (11) UNSIGNED NOT NULL AUTO_INCREMENT,
     access_token VARCHAR(255) NOT NULL,
     refresh_token VARCHAR(255) NOT NULL,
     id_user INT (11) UNSIGNED NOT NULL,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,  -- DEFAULT CURRENT_TIMESTAMP
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,  -- DEFAULT CURRENT_TIMESTAMP
-    CONSTRAINT pk_tokens PRIMARY KEY (access_token),
+    CONSTRAINT pk_tokens PRIMARY KEY (id_token),
+    CONSTRAINT uc_tokens_access_token UNIQUE (access_token),
     CONSTRAINT uc_tokens_refresh_token UNIQUE (refresh_token),
     CONSTRAINT fk_tokens_id_user FOREIGN KEY (id_user) REFERENCES users (id_user)
     ON UPDATE CASCADE ON DELETE CASCADE
