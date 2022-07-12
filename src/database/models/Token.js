@@ -2,10 +2,16 @@ const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
     const token = sequelize.define('token', {
+        id_token: {
+            type: DataTypes.INTEGER(11).UNSIGNED,
+            allowNull: false,
+            primaryKey: true,
+            autoIncrement: true
+        },
         access_token: {
             type: DataTypes.STRING(255),
             allowNull: false,
-            primaryKey: true,
+            unique: true,
         },
         refresh_token: {
             type: DataTypes.STRING(255),
@@ -24,7 +30,7 @@ module.exports = (sequelize) => {
         }
     }, {
         tableName: 'tokens',
-        defaultScope: { attributes: { exclude: ['id_user', 'created_at'] } }
+        defaultScope: { attributes: { exclude: ['id_token', 'id_user', 'created_at', 'updated_at'] } }
     });
     return token;
 };
