@@ -33,10 +33,24 @@ api.insertToken = async({ newToken }) => {
     return tokenAux;
 };
 
-api.updateToken = async({ access_token, updateToken }) => {
-    const token = await models.token.findOne({ where: { access_token: access_token } });
-    token.set(updateToken);
-    return await token.save();
+api.updateTokenByAccessToken = async({ access_token, updateToken }) => {
+    const token = await models.token.findOne({ where: { access_token: access_token }, attributes: { include: ['id_token'] } });
+    if (token) {
+        updateToken.id_token = token.id_token;
+        token.set(updateToken);
+        return await token.save();
+    }
+    return false;
+};
+
+api.updateTokenByRefreshToken = async({ refresh_token, updateToken }) => {
+    const token = await models.token.findOne({ where: { refresh_token: refresh_token }, attributes: { include: ['id_token'] } });
+    if (token) {
+        updateToken.id_token = token.id_token;
+        token.set(updateToken);
+        return await token.save();
+    }
+    return false;
 };
 
 api.deleteToken = async({ access_token }) => {
