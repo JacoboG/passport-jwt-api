@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const AuthenticationController = require('./../controllers/AuthenticateController');
-const { ensureAuthenticated, ensureRefreshToken, ensureSuperadmin } = require('./../middlewares/AuthenticateMiddleware');
+const { ensureAuthenticated, ensureRefreshToken } = require('./../middlewares/AuthenticateMiddleware');
 const { registerValidator, loginValidator } = require('../middlewares/validators/AuthValidator');
 
 // router.get('/', AuthenticationController.index);
