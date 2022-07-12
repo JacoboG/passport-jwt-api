@@ -16,6 +16,11 @@ module.exports = (sequelize) => {
             type: DataTypes.DATE,
             allowNull: false,
             defaultValue: sequelize.fn('now')
+        },
+        updated_at: {
+            type: DataTypes.DATE,
+            allowNull: false,
+            defaultValue: sequelize.fn('now')
         }
     }, {
         tableName: 'tokens',
