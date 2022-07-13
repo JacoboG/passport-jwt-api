@@ -1,4 +1,4 @@
-const { models } = require('../../database/dbSequelize');
+const api = require('../../database');
 const { body, validationResult } = require('express-validator');
 const _ = require('lodash');
 const constants = require('../../config/constants');
@@ -12,7 +12,7 @@ module.exports.registerValidator = [
         if (_.isUndefined(value) || _.isNull(value) || _.isEmpty(value)) {
             return;
         }
-        const user = await models.user.findOne({ where: { username: value } });
+        const user = await api.getUserByUsername({ username: value });
         if (user) {
             throw new Error('Ya existe un usuario con ese nombre de usuario.');
         }
@@ -34,7 +34,7 @@ module.exports.registerValidator = [
         if (_.isUndefined(value) || _.isNull(value) || _.isEmpty(value)) {
             return;
         }
-        const user = await models.user.findOne({ where: { email: value } });
+        const user = await api.getUserByUsername({ username: value });
         if (user) {
             throw new Error('Ya existe un usuario con ese email.');
         }
