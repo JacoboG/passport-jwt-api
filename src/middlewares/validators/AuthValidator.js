@@ -34,7 +34,7 @@ module.exports.registerValidator = [
         if (_.isUndefined(value) || _.isNull(value) || _.isEmpty(value)) {
             return;
         }
-        const user = await api.getUserByUsername({ username: value });
+        const user = await api.getUserByEmail({ email: value });
         if (user) {
             throw new Error('Ya existe un usuario con ese email.');
         }
