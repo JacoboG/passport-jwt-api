@@ -42,7 +42,7 @@ module.exports = (sequelize) => {
         }
     }, {
         tableName: 'users',
-        defaultScope: { attributes: { exclude: ['password', 'access_token', 'refresh_token', 'password_reset_token', 'id_role', 'id_status'] } }
+        defaultScope: { attributes: { exclude: ['password', 'password_reset_token'] } }
     });
     return user;
 };
