@@ -98,7 +98,7 @@ api.getUserByEmail = async({ email, id_status = 0 }) => {
     const whereStatement = api.buildStatement({ field: 'email', value: email, id_status });
     const user = await models.user.findOne({
         where: whereStatement,
-        attributes: { include: ['refresh_token'] }
+        attributes: { include: [] }
     });
     return user;
 };
