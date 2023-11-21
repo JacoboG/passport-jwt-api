@@ -1,3 +1,10 @@
+CREATE DATABASE IF NOT EXISTS `db-passport-jwt`;
+USE `db-passport-jwt`;
+
+GRANT USAGE ON *.* TO `db-passport-jwt-admin`@`%` IDENTIFIED BY PASSWORD '*30D899170D765E8DBD0CE7E94F8648C9F507D490';
+
+GRANT ALL PRIVILEGES ON `db-passport-jwt`.* TO `db-passport-jwt-admin`@`%` WITH GRANT OPTION;
+
 -- ROLES TABLE -- ROLES TABLE -- ROLES TABLE -- ROLES TABLE -- ROLES TABLE -- ROLES TABLE -- ROLES TABLE
 CREATE TABLE IF NOT EXISTS roles (
     id_role INT (2) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -49,6 +56,10 @@ CREATE TABLE IF NOT EXISTS users (
 CREATE INDEX idx_users_username ON users(username);
 CREATE INDEX idx_users_email ON users(email);
 -- INSERTIONS USERS TABLE
+INSERT INTO `users` (`id_user`, `username`, `password`, `email`, `fullname`, `password_reset_token`, `id_role`) VALUES
+(1, 'superadmin', '$2a$16$FRyHNkn/K7hPuNlvYmTIn.9su5MczaGQccvFFq0Zj70Q.2ui2z5KG', 'omar_192222@live.com', 'Omar Jacobo García', NULL, 3),
+(2, 'soyadmin', '$2a$16$FRyHNkn/K7hPuNlvYmTIn.9su5MczaGQccvFFq0Zj70Q.2ui2z5KG', 'jago120894@gmail.com', 'Omar Jacobo García', NULL, 2),
+(3, 'soyuser', '$2a$16$FRyHNkn/K7hPuNlvYmTIn.9su5MczaGQccvFFq0Zj70Q.2ui2z5KG', '22222@gmail.com', 'Omar Jacobo García', NULL, 1);
 
 -- TOKEN TABLE -- TOKEN TABLE -- TOKEN TABLE -- TOKEN TABLE -- TOKEN TABLE -- TOKEN TABLE -- TOKEN TABLE -- TOKEN TABLE
 CREATE TABLE IF NOT EXISTS tokens (
