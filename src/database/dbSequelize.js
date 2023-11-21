@@ -1,5 +1,6 @@
 const { Sequelize } = require('sequelize');
 const { makeAssociations } = require('./associations');
+const { addTriggers } = require('./triggers');
 const configDb = require('../config/config').database;
 const uri = `mysql://${ configDb.host }:${configDb.port}/${configDb.database}`;
 const sequelize = new Sequelize(uri, {
@@ -22,6 +23,8 @@ for (const modelDefiner of modelDefiners) {
 }
 
 makeAssociations(sequelize);
+
+addTriggers(sequelize);
 
 sequelize.sync()
     .then(err => {
