@@ -24,10 +24,9 @@ for (const modelDefiner of modelDefiners) {
 
 makeAssociations(sequelize);
 
-addTriggers(sequelize);
-
 sequelize.sync()
     .then(err => {
+        addTriggers(sequelize);
         console.log('La Conexión ha sido establecida exitosamente.');
     })
     .catch(err => {
